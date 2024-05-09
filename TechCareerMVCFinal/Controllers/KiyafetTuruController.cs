@@ -43,6 +43,8 @@ namespace TechCareerMVCFinal.Controllers
                 _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
                 // Girilen bilgileri SaveChanges ile db ye kaydetttim
                 _applicationDbContext.SaveChanges();
+                // TempData ile view-controller, controller-view arasinda verileri tasidim
+                TempData["basarili"] = "Yeni Kıyafet Türü başarılı bir şekilde oluşturuldu.";
                 // Index e gonderdim tum kayitlari gorebilmek icin
                 return RedirectToAction("Index");
             }
@@ -74,6 +76,7 @@ namespace TechCareerMVCFinal.Controllers
             {
                 _applicationDbContext.KiyafetTurleri.Update(kiyafetTuru);
                 _applicationDbContext.SaveChanges();
+                TempData["basarili"] = "Kıyafet Türü başarılı bir şekilde güncellendi.";
                 return RedirectToAction("Index");
             }
             else
@@ -95,6 +98,26 @@ namespace TechCareerMVCFinal.Controllers
                 return NotFound();
             }
             return View(kiyafetTuru);
+        }
+
+
+        [HttpPost]
+        public IActionResult KiyafetTuruSil(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            if (kiyafetTuru == null)
+            {
+                return NotFound();
+            }
+            _applicationDbContext.KiyafetTurleri.Remove(kiyafetTuru);
+            _applicationDbContext.SaveChanges();
+            TempData["basarili"] = "Kıyafet Türü başarılı bir şekilde silindi.";
+            return RedirectToAction("Index");
+
         }
 
     }

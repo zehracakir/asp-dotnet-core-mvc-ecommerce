@@ -4,18 +4,21 @@
     <div class="row pt-3 pb-4">
         <div>
             <h1>Kıyafet Türleri</h1>
-
         </div>
     </div>
+    @if (TempData["basarili"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["basarili"]
+        </div>
+    }
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Kıyafet Türü
-                </th>
+                <th>Id</th>
+                <th>Kıyafet Türü</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,20 +31,26 @@
                         <a asp-controller="KiyafetTuru" asp-action="KiyafetTuruGuncelle" asp-route-id="@kiyafetTuru.Id" type="button" class="btn btn-success" style="width:100px">Güncelle</a>
                     </td>
                     <td>
-                        <a asp-controller="KiyafetTuru" asp-action="KiyafetTuruSil" asp-route-id="@kiyafetTuru.Id" type="button" class="btn btn-danger" style="width:100px">Sil</a>
+                        <button type="button" onclick="sil(@kiyafetTuru.Id)" class="btn btn-danger" style="width:100px">Sil</button>
+                        <form id="silForm_@kiyafetTuru.Id" asp-controller="KiyafetTuru" asp-action="KiyafetTuruSil" method="post">
+                            <input type="hidden" name="id" value="@kiyafetTuru.Id" />
+                        </form>
                     </td>
-                   
-
                 </tr>
             }
         </tbody>
-
     </table>
-
     <div class="row pt-3 pb-2">  
         <div>
             <a asp-controller="KiyafetTuru" asp-action="KiyafetTuruEkle" class="btn btn-lg btn-primary" type="button">Yeni Kıyafet Türü Oluştur</a>
         </div>
     </div>
-
 </div>
+<script>
+    function sil(id) {
+        var onay = confirm("Bu kıyafet türünü silmek istediğinizden emin misiniz?");
+        if (onay) {
+            document.getElementById("silForm_" + id).submit();
+        }
+    }
+</script>
