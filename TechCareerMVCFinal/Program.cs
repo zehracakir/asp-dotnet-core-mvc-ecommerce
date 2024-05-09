@@ -1,7 +1,15 @@
+﻿using Microsoft.EntityFrameworkCore;
+using TechCareerMVCFinal.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//DefaultConnection'ı bulup bakacak
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
