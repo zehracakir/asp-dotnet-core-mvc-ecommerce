@@ -1,0 +1,88 @@
+# Binaries
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+
+# Dependency directories
+node_modules/
+bower_components/
+packages/
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio
+.vs/
+/*.vspscc
+/*.suo
+/*.user
+/*.sln.docstates
+
+# Resharper
+_resharper/
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+# Mobile builds
+[Dd]roid/
+[Tt]emp/
+# Unity3D
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+# Enable "build/" folder in the root of the web project
+# Only use it if you will build your project in the wwwroot directory, see:
+# https://docs.microsoft.com/en-us/aspnet/core/client-side/using-gulp
+# build/
+
+# Enable "wwwroot/" folder in the root of the web project, if necessary
+# wwwroot/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Cake - Uncomment if you are using Cake to build tasks
+# tools/
+# !tools/packages.config
+
+# Tabs Studio
+*.tss
+
+# Telerik's JustMock configuration file
+*.jmconfig
+
+# BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# Command-line build output
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
