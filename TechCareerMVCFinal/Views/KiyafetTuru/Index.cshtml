@@ -24,6 +24,14 @@
                 <tr>
                     <td>@kiyafetTuru.Id</td>
                     <td>@kiyafetTuru.Ad</td>
+                    <td>
+                        <a asp-controller="KiyafetTuru" asp-action="KiyafetTuruGuncelle" asp-route-id="@kiyafetTuru.Id" type="button" class="btn btn-success" style="width:100px">Güncelle</a>
+                    </td>
+                    <td>
+                        <a asp-controller="KiyafetTuru" asp-action="KiyafetTuruSil" asp-route-id="@kiyafetTuru.Id" type="button" class="btn btn-danger" style="width:100px">Sil</a>
+                    </td>
+                   
+
                 </tr>
             }
         </tbody>

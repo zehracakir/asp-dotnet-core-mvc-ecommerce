@@ -29,28 +29,73 @@ namespace TechCareerMVCFinal.Controllers
         [HttpPost]
         public IActionResult KiyafetTuruEkle(KiyafetTuru kiyafetTuru)
         {
-            // Kullanici hatalarini frontend de kontrol etme kismi
-            _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
-            // Girilen bilgileri SaveChanges ile db ye kaydetttim
-            _applicationDbContext.SaveChanges();
-            // Index e gonderdim tum kayitlari gorebilmek icin
-            return RedirectToAction("Index");
+            //// Kullanici hatalarini frontend de kontrol etme kismi
+            //_applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
+            //// Girilen bilgileri SaveChanges ile db ye kaydetttim
+            //_applicationDbContext.SaveChanges();
+            //// Index e gonderdim tum kayitlari gorebilmek icin
+            //return RedirectToAction("Index");
 
 
-            // Kullanici hatalarini backend de kontrol etme kismi
-            //if (ModelState.IsValid)
-            //{
-            //    _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
-            //    // Girilen bilgileri SaveChanges ile db ye kaydetttim
-            //    _applicationDbContext.SaveChanges();
-            //    // Index e gonderdim tum kayitlari gorebilmek icin
-            //    return RedirectToAction("Index");
-            //}
-            //else
-            //{
-            //    return View();
-            //}
+            //Kullanici hatalarini backend de kontrol etme kismi
+            if (ModelState.IsValid)
+            {
+                _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
+                // Girilen bilgileri SaveChanges ile db ye kaydetttim
+                _applicationDbContext.SaveChanges();
+                // Index e gonderdim tum kayitlari gorebilmek icin
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
 
         }
+
+        public IActionResult KiyafetTuruGuncelle(int? id)
+        {
+            if(id == null ||id == 0)
+            {
+                return NotFound();
+            }
+            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            if( kiyafetTuru == null)
+            {
+                return NotFound();
+            }
+            return View(kiyafetTuru);
+        }
+
+        [HttpPost]
+        public IActionResult KiyafetTuruGuncelle(KiyafetTuru kiyafetTuru)
+        {
+            if (ModelState.IsValid)
+            {
+                _applicationDbContext.KiyafetTurleri.Update(kiyafetTuru);
+                _applicationDbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
+        public IActionResult KiyafetTuruSil(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            if (kiyafetTuru == null)
+            {
+                return NotFound();
+            }
+            return View(kiyafetTuru);
+        }
+
     }
 }
