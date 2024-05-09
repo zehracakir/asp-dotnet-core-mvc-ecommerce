@@ -1,0 +1,25 @@
+﻿@model List<KiyafetTuru>
+
+<h1>Kıyafet Türleri</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Kıyafet Türü
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kiyafetTuru in Model)
+        {
+            <tr>
+                <td>@kiyafetTuru.Id</td>
+                <td>@kiyafetTuru.Ad</td>
+            </tr>
+        }
+    </tbody>
+  
+</table>
