@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TechCareerMVCFinal.Data;
+using TechCareerMVCFinal.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+// _kiyafetTuruRepository nesnesini burda olusturduk --> Dependency injenction
+builder.Services.AddScoped<IKiyafetTuruRepository, KiyafetTuruRepository>();
 
 var app = builder.Build();
 

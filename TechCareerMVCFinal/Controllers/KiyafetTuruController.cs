@@ -8,15 +8,15 @@ namespace TechCareerMVCFinal.Controllers
     {
         // dependecy injenction kullandim -> singleton design pattern
 
-        private readonly ApplicationDbContext _applicationDbContext;
-        public KiyafetTuruController(ApplicationDbContext applicationDbContext)
+        private readonly IKiyafetTuruRepository _kiyafetTuruRepository;
+        public KiyafetTuruController(IKiyafetTuruRepository context)
         {
-            _applicationDbContext = applicationDbContext;
+            _kiyafetTuruRepository = context;
         }
         public IActionResult Index()
         {
             // Index action cagrildigi zaman db ye gidecek ve KiyafetTurlerini getirecek bize bu liste ile.
-            List<KiyafetTuru> kiyafetTuruList = _applicationDbContext.KiyafetTurleri.ToList();  
+            List<KiyafetTuru> kiyafetTuruList = _kiyafetTuruRepository.GetAll().ToList();  
 
             return View(kiyafetTuruList);
         }
@@ -40,9 +40,9 @@ namespace TechCareerMVCFinal.Controllers
             //Kullanici hatalarini backend de kontrol etme kismi
             if (ModelState.IsValid)
             {
-                _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
-                // Girilen bilgileri SaveChanges ile db ye kaydetttim
-                _applicationDbContext.SaveChanges();
+                _kiyafetTuruRepository.Ekle(kiyafetTuru);
+                // Girilen bilgileri SaveChanges ile db ye kaydetttim ---> Kaydet olarak degistirdim
+                _kiyafetTuruRepository.Kaydet();
                 // TempData ile view-controller, controller-view arasinda verileri tasidim
                 TempData["basarili"] = "Yeni Kıyafet Türü başarılı bir şekilde oluşturuldu.";
                 // Index e gonderdim tum kayitlari gorebilmek icin
@@ -61,7 +61,7 @@ namespace TechCareerMVCFinal.Controllers
             {
                 return NotFound();
             }
-            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            KiyafetTuru? kiyafetTuru = _kiyafetTuruRepository.Get(u => u.Id == id);
             if( kiyafetTuru == null)
             {
                 return NotFound();
@@ -74,8 +74,8 @@ namespace TechCareerMVCFinal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _applicationDbContext.KiyafetTurleri.Update(kiyafetTuru);
-                _applicationDbContext.SaveChanges();
+                _kiyafetTuruRepository.Guncelle(kiyafetTuru);
+                _kiyafetTuruRepository.Kaydet();
                 TempData["basarili"] = "Kıyafet Türü başarılı bir şekilde güncellendi.";
                 return RedirectToAction("Index");
             }
@@ -92,7 +92,7 @@ namespace TechCareerMVCFinal.Controllers
             {
                 return NotFound();
             }
-            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            KiyafetTuru? kiyafetTuru = _kiyafetTuruRepository.Get(u => u.Id == id);
             if (kiyafetTuru == null)
             {
                 return NotFound();
@@ -108,13 +108,13 @@ namespace TechCareerMVCFinal.Controllers
             {
                 return NotFound();
             }
-            KiyafetTuru? kiyafetTuru = _applicationDbContext.KiyafetTurleri.Find(id);
+            KiyafetTuru? kiyafetTuru = _kiyafetTuruRepository.Get(u =>u.Id == id);
             if (kiyafetTuru == null)
             {
                 return NotFound();
             }
-            _applicationDbContext.KiyafetTurleri.Remove(kiyafetTuru);
-            _applicationDbContext.SaveChanges();
+            _kiyafetTuruRepository.Sil(kiyafetTuru);
+            _kiyafetTuruRepository.Kaydet();
             TempData["basarili"] = "Kıyafet Türü başarılı bir şekilde silindi.";
             return RedirectToAction("Index");
 
