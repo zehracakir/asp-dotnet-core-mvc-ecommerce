@@ -20,5 +20,37 @@ namespace TechCareerMVCFinal.Controllers
 
             return View(kiyafetTuruList);
         }
+        
+        public IActionResult KiyafetTuruEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult KiyafetTuruEkle(KiyafetTuru kiyafetTuru)
+        {
+            // Kullanici hatalarini frontend de kontrol etme kismi
+            _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
+            // Girilen bilgileri SaveChanges ile db ye kaydetttim
+            _applicationDbContext.SaveChanges();
+            // Index e gonderdim tum kayitlari gorebilmek icin
+            return RedirectToAction("Index");
+
+
+            // Kullanici hatalarini backend de kontrol etme kismi
+            //if (ModelState.IsValid)
+            //{
+            //    _applicationDbContext.KiyafetTurleri.Add(kiyafetTuru);
+            //    // Girilen bilgileri SaveChanges ile db ye kaydetttim
+            //    _applicationDbContext.SaveChanges();
+            //    // Index e gonderdim tum kayitlari gorebilmek icin
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //{
+            //    return View();
+            //}
+
+        }
     }
 }
