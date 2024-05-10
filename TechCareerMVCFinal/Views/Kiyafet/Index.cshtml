@@ -20,6 +20,7 @@
                 <th>Fiyat</th>
                 <th>Renk</th>
                 <th>Cinsiyet</th>
+                <th>Kıyafet Türü</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     <td>@kiyafet.Fiyati</td>
                     <td>@kiyafet.Rengi</td>
                     <td>@kiyafet.Cinsiyet</td>
+                    <td></td>
                     <td>
                         <a asp-controller="Kiyafet" asp-action="KiyafetGuncelle" asp-route-id="@kiyafet.Id" type="button" class="btn btn-success" style="width:100px">Güncelle</a>
                     </td>

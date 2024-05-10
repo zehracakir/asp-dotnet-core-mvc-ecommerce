@@ -1,4 +1,6 @@
 ﻿ using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using TechCareerMVCFinal.Data;
 using TechCareerMVCFinal.Models;
 
@@ -9,20 +11,29 @@ namespace TechCareerMVCFinal.Controllers
         // dependecy injenction kullandim -> singleton design pattern
 
         private readonly IKiyafetRepository _kiyafetRepository;
-        public KiyafetController(IKiyafetRepository context)
+        private readonly IKiyafetTuruRepository _kiyafetTuruRepository;
+        public KiyafetController(IKiyafetRepository context, IKiyafetTuruRepository kiyafetTuruRepository)
         {
             _kiyafetRepository = context;
+            _kiyafetTuruRepository = kiyafetTuruRepository;
         }
         public IActionResult Index()
         {
             // Index action cagrildigi zaman db ye gidecek ve KiyafetTurlerini getirecek bize bu liste ile.
-            List<Kiyafet> kiyafetList = _kiyafetRepository.GetAll().ToList();  
-
+            List<Kiyafet> kiyafetList = _kiyafetRepository.GetAll().ToList();
             return View(kiyafetList);
         }
         
         public IActionResult KiyafetEkle()
         {
+            IEnumerable<SelectListItem> kiyafetTuruList = _kiyafetTuruRepository.GetAll()
+               .Select(k => new SelectListItem
+               {
+                   Text = k.Ad,
+                   Value = k.Id.ToString()
+               });
+            // ViewBag --> Controllerdan view katmanina nasil aktaracagimiz kismindaki cozumdur
+            ViewBag.kiyafetTuruList = kiyafetTuruList;
             return View();
         }
 

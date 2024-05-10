@@ -23,8 +23,13 @@
         </div>
         <div class="mb-3">
             <label asp-for="Cinsiyet" class="mb-2"></label>
-            <input asp-for="Cinsiyet" class="form-control" />
+            <input asp-for="Cinsiyet"  class="form-control" />
             <span asp-validation-for="Cinsiyet" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="KiyafetTuruId" class="mb-2"></label>
+            <select asp-for="KiyafetTuruId" asp-items="ViewBag.kiyafetTuruList" class="form-select"></select>
+            <span asp-validation-for="KiyafetTuruId" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-lg btn-primary">Kıyafet Ekle</button>
         <a asp-controller="Kiyafet" asp-action="Index" class="btn btn-lg btn-primary">Kıyafetlere Geri Dön</a>

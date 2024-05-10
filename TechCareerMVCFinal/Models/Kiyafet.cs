@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechCareerMVCFinal.Models
 {
@@ -18,5 +19,11 @@ namespace TechCareerMVCFinal.Models
 
         [Required]
         public string Cinsiyet { get; set; }
+
+        // Kiyafet turunu foreignkey olarak ekledim
+        public int KiyafetTuruId { get; set; }
+        [ForeignKey("KiyafetTuruId")]
+        public KiyafetTuru KiyafetTuru { get; set; }
+
     }
 }

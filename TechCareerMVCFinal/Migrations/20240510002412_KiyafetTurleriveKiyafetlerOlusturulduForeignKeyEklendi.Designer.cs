@@ -11,8 +11,8 @@ using TechCareerMVCFinal.Data;
 namespace TechCareerMVCFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240509232611_KiyafetlerTablosuEkle")]
-    partial class KiyafetlerTablosuEkle
+    [Migration("20240510002412_KiyafetTurleriveKiyafetlerOlusturulduForeignKeyEklendi")]
+    partial class KiyafetTurleriveKiyafetlerOlusturulduForeignKeyEklendi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,11 +43,16 @@ namespace TechCareerMVCFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("KiyafetTuruId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Rengi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("KiyafetTuruId");
 
                     b.ToTable("Kiyafetler");
                 });
@@ -68,6 +73,17 @@ namespace TechCareerMVCFinal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KiyafetTurleri");
+                });
+
+            modelBuilder.Entity("TechCareerMVCFinal.Models.Kiyafet", b =>
+                {
+                    b.HasOne("TechCareerMVCFinal.Models.KiyafetTuru", "KiyafetTuru")
+                        .WithMany()
+                        .HasForeignKey("KiyafetTuruId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KiyafetTuru");
                 });
 #pragma warning restore 612, 618
         }
