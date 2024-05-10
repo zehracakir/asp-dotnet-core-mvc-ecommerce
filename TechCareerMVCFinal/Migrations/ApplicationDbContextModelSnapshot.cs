@@ -76,6 +76,27 @@ namespace TechCareerMVCFinal.Migrations
                     b.ToTable("KiyafetTurleri");
                 });
 
+            modelBuilder.Entity("TechCareerMVCFinal.Models.SiparisVerme", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("KiyafetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("kullaniciId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KiyafetId");
+
+                    b.ToTable("SiparisVerme");
+                });
+
             modelBuilder.Entity("TechCareerMVCFinal.Models.Kiyafet", b =>
                 {
                     b.HasOne("TechCareerMVCFinal.Models.KiyafetTuru", "KiyafetTuru")
@@ -85,6 +106,17 @@ namespace TechCareerMVCFinal.Migrations
                         .IsRequired();
 
                     b.Navigation("KiyafetTuru");
+                });
+
+            modelBuilder.Entity("TechCareerMVCFinal.Models.SiparisVerme", b =>
+                {
+                    b.HasOne("TechCareerMVCFinal.Models.Kiyafet", "Kiyafet")
+                        .WithMany()
+                        .HasForeignKey("KiyafetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kiyafet");
                 });
 #pragma warning restore 612, 618
         }

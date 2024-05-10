@@ -12,12 +12,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
 
+//Scoped Injenction
 // _kiyafetTuruRepository nesnesini burda olusturduk --> Dependency injenction
 builder.Services.AddScoped<IKiyafetTuruRepository, KiyafetTuruRepository>();
 
 
 // _kiyafetRepository nesnesini burda olusturduk --> Dependency injenction
 builder.Services.AddScoped<IKiyafetRepository, KiyafetRepository>();
+
+//_siparisVermeRepository nesnesini burda olusturduk --> Dependency injenction
+builder.Services.AddScoped<ISiparisVermeRepository, SiparisVermeRepository>();
 
 var app = builder.Build();
 

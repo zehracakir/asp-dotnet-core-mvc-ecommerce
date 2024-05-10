@@ -1,0 +1,50 @@
+﻿@model SiparisVerme
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-9">
+            <div class="container pt-3 mt-5">
+                <div class="row pb-3">
+                    <h2 class="text-primary">@(Model == null ? "Sipariş Ver" : "Sipariş Güncelle")</h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="kullaniciId" class="mb-2">Kullanıcı Id</label>
+                    <input asp-for="kullaniciId" class="form-control" />
+                    <span asp-validation-for="kullaniciId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="KiyafetId" class="mb-2">Kıyafet Adı</label>
+                    <select asp-for="KiyafetId" asp-items="ViewBag.kiyafetList" class="form-select"></select>
+                </div>
+
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary">Sipariş Güncelle</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-lg btn-primary">Sipariş Ver</button>
+                }
+                <a asp-controller="SiparisVerme" asp-action="Index" class="btn btn-lg btn-primary">Siparişlere Geri Dön</a>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="container pt-3 mt-5">
+                @if (Model != null)
+                {
+                    <img src="@Model.Kiyafet.ResimUrl" width="100%" style="border-radius:7px border:1px solid #bbb9b9" />
+                }
+            </div>
+        </div>
+    </div>
+    
+</form>
+@* 
+frontend de kullanici hatalarini engellemek icin
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+} *@
