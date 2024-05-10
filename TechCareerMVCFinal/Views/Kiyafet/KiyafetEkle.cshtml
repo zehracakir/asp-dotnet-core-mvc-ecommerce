@@ -1,6 +1,6 @@
 ﻿@model Kiyafet
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="container pt-3 mt-5">
         <div class="row pb-3">
             <h2 class="text-primary" >Yeni Kıyafet Ekle</h2>
@@ -30,6 +30,10 @@
             <label asp-for="KiyafetTuruId" class="mb-2"></label>
             <select asp-for="KiyafetTuruId" asp-items="ViewBag.kiyafetTuruList" class="form-select"></select>
             <span asp-validation-for="KiyafetTuruId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label  class="mb-2"></label>
+            <input type="file" class="form-control" />
         </div>
         <button type="submit" class="btn btn-lg btn-primary">Kıyafet Ekle</button>
         <a asp-controller="Kiyafet" asp-action="Index" class="btn btn-lg btn-primary">Kıyafetlere Geri Dön</a>
