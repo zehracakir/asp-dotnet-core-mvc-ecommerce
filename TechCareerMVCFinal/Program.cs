@@ -15,6 +15,10 @@ options.UseSqlServer(connectionString));
 // _kiyafetTuruRepository nesnesini burda olusturduk --> Dependency injenction
 builder.Services.AddScoped<IKiyafetTuruRepository, KiyafetTuruRepository>();
 
+
+// _kiyafetRepository nesnesini burda olusturduk --> Dependency injenction
+builder.Services.AddScoped<IKiyafetRepository, KiyafetRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

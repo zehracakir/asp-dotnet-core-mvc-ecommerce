@@ -1,0 +1,32 @@
+﻿@model Kiyafet
+
+<form method="post">
+    <div class="container pt-3 mt-5">
+        <div class="row pb-3">
+            <h2 class="text-primary">Kıyafet Güncelle</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="KiyafetAdi" class="mb-2"></label>
+            <input asp-for="KiyafetAdi" class="form-control" />
+            <span asp-validation-for="KiyafetAdi" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Fiyati" class="mb-2"></label>
+            <input asp-for="Fiyati" class="form-control" />
+            <span asp-validation-for="Fiyati" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Rengi" class="mb-2"></label>
+            <input asp-for="Rengi" class="form-control" />
+            <span asp-validation-for="Rengi" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cinsiyet" class="mb-2"></label>
+            <input asp-for="Cinsiyet" class="form-control" />
+            <span asp-validation-for="Cinsiyet" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-lg btn-success">Kıyafet Güncelle</button>
+        <a asp-controller="Kiyafet" asp-action="Index" class="btn btn-lg btn-primary">Kıyafetlere Geri Dön</a>
+    </div>
+</form>
