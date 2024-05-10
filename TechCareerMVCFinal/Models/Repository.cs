@@ -15,6 +15,8 @@ namespace TechCareerMVCFinal.Models
         {
             _applicationDbContext = applicationDbContext;
             this.dbSet = _applicationDbContext.Set<T>();
+            // foreign yapısındaki degeri getirmek icin kullandim
+            _applicationDbContext.Kiyafetler.Include(k => k.KiyafetTuru).Include(k => k.KiyafetTuruId);
         }
 
         public void Ekle(T entity)
@@ -22,17 +24,33 @@ namespace TechCareerMVCFinal.Models
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filtre)
+        public T Get(Expression<Func<T, bool>> filtre, string? includeProps = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filtre);
             // query den birden fazla kayit gelebilme ihtimaline kars i FirstOrDefault() getirsin deidm.
+            if (!string.IsNullOrEmpty(includeProps))
+            {
+                foreach (var includeProp in includeProps.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+
+            }
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProps = null)
         {
             IQueryable<T> query = dbSet;
+            if (!string.IsNullOrEmpty(includeProps))
+            {
+                foreach (var includeProp in includeProps.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+                
+            }
             return query.ToList();
         }
 

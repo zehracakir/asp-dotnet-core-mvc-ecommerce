@@ -32,14 +32,14 @@
                     <td>@kiyafet.Fiyati</td>
                     <td>@kiyafet.Rengi</td>
                     <td>@kiyafet.Cinsiyet</td>
-                    <td></td>
+                    <td>@kiyafet.KiyafetTuru.Ad</td>
                     <td>
-                        <a asp-controller="Kiyafet" asp-action="KiyafetGuncelle" asp-route-id="@kiyafet.Id" type="button" class="btn btn-success" style="width:100px">Güncelle</a>
+                        <a asp-controller="Kiyafet" asp-action="KiyafetEkleGuncelle" asp-route-id="@kiyafet.Id" type="button" class="btn btn-success" style="width:100px">Güncelle</a>
                     </td>
                     <td>
                         <button type="button" onclick="sil(@kiyafet.Id)" class="btn btn-danger" style="width:100px">Sil</button>
                         <form id="silForm_@kiyafet.Id" asp-controller="Kiyafet" asp-action="KiyafetSil" method="post">
-                            <input type="hidden" name="id" value="@kiyafet.Id" />
+                            <input id="ResimUrl" type="hidden" name="id" value="@kiyafet.Id" />
                         </form>
                     </td>
                 </tr>
@@ -48,7 +48,7 @@
     </table>
     <div class="row pt-3 pb-2">  
         <div>
-            <a asp-controller="Kiyafet" asp-action="KiyafetEkle" class="btn btn-lg btn-primary" type="button">Yeni Kıyafet Oluştur</a>
+            <a asp-controller="Kiyafet" asp-action="KiyafetEkleGuncelle" class="btn btn-lg btn-primary" type="button">Yeni Kıyafet Oluştur</a>
         </div>
     </div>
 </div>

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace TechCareerMVCFinal.Models
 {
@@ -20,10 +22,15 @@ namespace TechCareerMVCFinal.Models
         [Required]
         public string Cinsiyet { get; set; }
 
+        [ValidateNever]
         // Kiyafet turunu foreignkey olarak ekledim
         public int KiyafetTuruId { get; set; }
         [ForeignKey("KiyafetTuruId")]
+        [ValidateNever]
         public KiyafetTuru KiyafetTuru { get; set; }
+
+        [ValidateNever]
+        public string ResimUrl{ get; set; }
 
     }
 }
