@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TechCareerMVCFinal.Data;
 using TechCareerMVCFinal.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+// AddDefaultTokenProvideeer() email kaynakli hata vermesin dyie sonuna ekledim 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders(); ;
 
 //Scoffold Identity icin Razor page leri kullanacagim.
 builder.Services.AddRazorPages();
@@ -28,6 +30,9 @@ builder.Services.AddScoped<IKiyafetRepository, KiyafetRepository>();
 
 //_siparisVermeRepository nesnesini burda olusturduk --> Dependency injenction
 builder.Services.AddScoped<ISiparisVermeRepository, SiparisVermeRepository>();
+
+//_emailSender gerektiginde alinsin kullanilsin diye Dependemcy Injecmtion mekanizmama ekledim
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 

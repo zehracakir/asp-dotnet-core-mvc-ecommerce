@@ -1,4 +1,5 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using TechCareerMVCFinal.Models;
 
 namespace TechCareerMVCFinal.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]
     public class SiparisVermeController : Controller
     {
         // dependecy injenction kullandim -> singleton design pattern

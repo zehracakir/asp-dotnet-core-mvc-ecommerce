@@ -1,11 +1,14 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using TechCareerMVCFinal.Data;
 using TechCareerMVCFinal.Models;
 
 namespace TechCareerMVCFinal.Controllers
-{
+{ 
+
+[Authorize(Roles = UserRoles.Role_Admin)]
     public class KiyafetController : Controller
     {
         // dependecy injenction kullandim -> singleton design pattern
