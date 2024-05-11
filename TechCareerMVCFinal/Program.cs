@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TechCareerMVCFinal.Data;
 using TechCareerMVCFinal.Models;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,11 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+//Scoffold Identity icin Razor page leri kullanacagim.
+builder.Services.AddRazorPages();
 
 //Scoped Injenction
 // _kiyafetTuruRepository nesnesini burda olusturduk --> Dependency injenction
@@ -39,6 +45,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+// app i razor page map edecegimi soyledim
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
