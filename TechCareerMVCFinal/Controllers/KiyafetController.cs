@@ -8,7 +8,7 @@ using TechCareerMVCFinal.Models;
 namespace TechCareerMVCFinal.Controllers
 { 
 
-[Authorize(Roles = UserRoles.Role_Admin)]
+
     public class KiyafetController : Controller
     {
         // dependecy injenction kullandim -> singleton design pattern
@@ -22,6 +22,8 @@ namespace TechCareerMVCFinal.Controllers
             _kiyafetTuruRepository = kiyafetTuruRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Authorize(Roles = "Admin, Kullanici")]
         public IActionResult Index()
         {
             // Index action cagrildigi zaman db ye gidecek ve KiyafetTurlerini getirecek bize bu liste ile.
@@ -29,7 +31,8 @@ namespace TechCareerMVCFinal.Controllers
             List<Kiyafet> kiyafetList = _kiyafetRepository.GetAll(includeProps:"KiyafetTuru").ToList();
             return View(kiyafetList);
         }
-        
+
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult KiyafetEkleGuncelle(int? id)
         {
             IEnumerable<SelectListItem> kiyafetTuruList = _kiyafetTuruRepository.GetAll()
@@ -60,6 +63,7 @@ namespace TechCareerMVCFinal.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult KiyafetEkleGuncelle(Kiyafet kiyafet, IFormFile? file)
         {
             //// Kullanici hatalarini frontend de kontrol etme kismi
@@ -141,6 +145,7 @@ namespace TechCareerMVCFinal.Controllers
 
         //}
 
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult KiyafetSil(int? id)
         {
             if (id == null || id == 0)
@@ -157,6 +162,7 @@ namespace TechCareerMVCFinal.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public IActionResult KiyafetSil(int id)
         {
             if (id == null || id == 0)
