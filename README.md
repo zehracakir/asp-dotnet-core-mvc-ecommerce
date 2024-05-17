@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is an e-commerce application built using [ASP.NET](http://asp.net/) Core MVC. The application focuses on selling clothes and allows users to view and order different types of clothing. The project implements a role-based authorization system where Admin and Kullanici (User) roles have different levels of access and functionalities. The application uses Entity Framework Core for database operations, follows the Repository Design Pattern for managing data access, and employs Dependency Injection for managing dependencies.
+This project is an e-commerce application built using [ASP.NET](https://asp.net/) Core MVC. The application focuses on selling clothes and allows users to view and order different types of clothing. The project implements a role-based authorization system where Admin and Kullanici (User) roles have different levels of access and functionalities. The application uses Entity Framework Core for database operations, follows the Repository Design Pattern for managing data access, and employs Dependency Injection for managing dependencies.
 
 ## Features
 
