@@ -10,7 +10,7 @@ namespace TechCareerMVCFinal.Models
         public int Id { get; set; }
 
         [Required]
-        public int kullaniciId { get; set; }
+        public string kullaniciId { get; set; }
 
         [ValidateNever]
         public int KiyafetId { get; set; }

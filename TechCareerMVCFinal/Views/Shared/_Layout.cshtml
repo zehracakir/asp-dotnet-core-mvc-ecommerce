@@ -46,6 +46,11 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">İletişim</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Sepet", "SiparisVerme")">Sepet <span class="badge badge-pill badge-primary">@ViewBag.SepetAdet</span></a>
+                        </li>
+                    </ul>
                     <partial name="_LoginPartial"></partial>
                 </div>
             </div>
@@ -58,7 +63,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container align:center">
+        <div class="container">
             &copy; 2024 - TechCareerMVCFinal zehracakir.github.com- <a asp-area="" asp-controller="Home" asp-action="Privacy">İletişim</a>
         </div>
     </footer>

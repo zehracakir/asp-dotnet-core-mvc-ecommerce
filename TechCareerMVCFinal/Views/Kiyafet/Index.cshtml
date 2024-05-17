@@ -1,8 +1,37 @@
-﻿@using TechCareerMVCFinal.Data
+﻿@using Microsoft.AspNetCore.Identity
+@using TechCareerMVCFinal.Data
 @model List<Kiyafet>
 
 <div class="container">
-    <div class="row pt-3 pb-4">
+    @if (User.IsInRole(UserRoles.Role_Kullanici)){
+        <div class="row">
+            @foreach (var kiyafet in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="@kiyafet.ResimUrl" alt="Kıyafet Resmi" height="300px">
+                        <div class="card-body">
+                            <h5 class="card-title">@kiyafet.KiyafetAdi</h5>
+                            <p class="card-text"><small class="text_muted">@kiyafet.KiyafetTuru.Ad</small></p>
+                            <p class="card-text">@kiyafet.Cinsiyet</p>
+                            <p class="card-text">@kiyafet.Rengi</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    @* burda modelden kaynakli bi hata aliyor olabilirim *@
+                                    @* <a asp-controller="SiparisVerme" asp-action="SiparisVerEkleGuncelle" asp-route-kiyafet="@kiyafet" asp-route-id="@kiyafet.Id" class="btn btn-sm btn-primary">Sipariş Ver</a> *@
+                                    <a href="@Url.Action("SepeteEkle", "SiparisVerme", new { kiyafetId = kiyafet.Id})" class="btn btn-primary">Sepete Ekle</a>
+                                </div>
+                                <small class="text-muted">@kiyafet.Fiyati TL</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (User.IsInRole(UserRoles.Role_Admin))
+    {
+          <div class="row pt-3 pb-4">
         <div>
             <h1>Kıyafetler</h1>
         </div>
@@ -70,7 +99,10 @@
         </div>
     </div> 
     }
+    }
 </div>
+    
+  
 <script>
     function sil(id) {
         var onay = confirm("Bu kıyafeti silmek istediğinizden emin misiniz?");

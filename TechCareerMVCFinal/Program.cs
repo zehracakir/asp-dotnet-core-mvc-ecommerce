@@ -3,6 +3,7 @@ using TechCareerMVCFinal.Data;
 using TechCareerMVCFinal.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
